@@ -1,0 +1,191 @@
+body {
+      font-family: Verdana, sans-serif;
+      background-color: #002b5c;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300"><text x="0" y="150" font-size="40" fill="rgba(255,255,255,0.05)" transform="rotate(-45)">KLZ</text></svg>');
+      background-repeat: repeat;
+    }
+    header {
+      background-color: #001f3f;
+      padding: 10px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      color: #ffffff;
+      font-size: 1.5em;
+    }
+    nav {
+      margin-top: 10px;
+      text-align: center;
+      flex-wrap: wrap;
+    }
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      background-color: #004080;
+      color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background-color: #0059b3;
+    }
+    main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    input, select, textarea {
+      padding: 10px;
+      margin: 5px 0;
+      width: 100%;
+      max-width: 400px;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    label {
+      margin-top: 15px;
+      display: block;
+    }
+    .tela {
+      display: none;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      color: #ffffff;
+      margin-top: 20px;
+    }
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+    }
+    .chart-container {
+      width: 100%;
+      max-width: 600px;
+      margin: 20px auto;
+    }
+    .filter-container {
+      background-color: rgba(0, 51, 102, 0.6);
+      padding: 10px 15px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      color: #ddd;
+      font-size: 0.9em;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+    .filter-container h3 {
+      margin-top: 0;
+      font-weight: 600;
+      color: #ccc;
+    }
+    .filter-container label {
+      display: inline-block;
+      margin-right: 15px;
+      margin-bottom: 5px;
+      font-weight: 500;
+      color: #bbb;
+    }
+    .filter-container select,
+    .filter-container input[type="date"] {
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #eee;
+      padding: 5px 8px;
+      border-radius: 3px;
+      font-size: 0.9em;
+      transition: border-color 0.3s ease;
+      width: auto;
+      min-width: 120px;
+    }
+    .filter-container select:hover,
+    .filter-container input[type="date"]:hover,
+    .filter-container select:focus,
+    .filter-container input[type="date"]:focus {
+      border-color: #66aaff;
+      outline: none;
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.2em;
+      }
+      button {
+        width: 100%;
+        font-size: 1em;
+      }
+      nav {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .data-section {
+        flex-direction: column;
+      }
+    }
+    /* Estilos para botões */
+    button.danger {
+      background-color: #d9534f;
+    }
+    button.danger:hover {
+      background-color: #c9302c;
+    }
+    button.success {
+      background-color: #5cb85c;
+    }
+    button.success:hover {
+      background-color: #4cae4c;
+    }
+    button.warning {
+      background-color: #f0ad4e;
+    }
+    button.warning:hover {
+      background-color: #eea236;
+    }
+    #importDefeitos {
+      margin: 10px 0;
+    }
+    /* Estilos para a tela High */
+    #timerDisplay {
+      font-family: monospace;
+      background-color: rgba(0,0,0,0.2);
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      font-size: 24px;
+    }
+    #servicoAtualInfo {
+      padding: 8px;
+      background-color: rgba(0,80,160,0.3);
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .servico-item {
+      padding: 8px;
+      margin: 5px 0;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .servico-item:hover {
+      background-color: rgba(255,255,255,0.2);
+    }
+    .servico-ativo {
+      background-color: rgba(0,255,0,0.2);
+      font-weight: bold;
+    }
+    .historico-item {
+      padding: 10px;
+      margin: 5px 0;
+      background-color: rgba(0,0,0,0.1);
+      border-radius: 5px;
+    }

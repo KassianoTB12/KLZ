@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>KLZ Analytics</title>
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="style.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script defer src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1>KLZ Analytics</h1>
+    <nav>
+      <button onclick="mostrarTela('cadastroProduto')">Cadastrar Produto</button>
+      <button onclick="mostrarTela('cadastroDefeito')">Cadastrar Defeito</button>
+      <button onclick="mostrarTela('registro')">Registrar</button>
+      <button onclick="mostrarTela('quarentena')">Quarentena</button>
+      <button onclick="mostrarTela('high')">High</button>
+      <button onclick="mostrarTela('relatorio')">Relatório</button>
+      <button onclick="mostrarTela('graficos')">Gráficos</button>
+      <button onclick="mostrarTela('gerenciamento')">Gerenciamento</button>
+      <button onclick="logout()" class="danger">Sair</button>
+    </nav>
+  </header>
+  <main>
+    <!-- Tela de login -->
+    <section id="login" class="tela" style="display:block;">
+      <h2>Login</h2>
+      <label>Usuário: <input id="usuario" /></label>
+      <label>Senha: <input id="senha" type="password" /></label>
+      <button onclick="login()">Entrar</button>
+      <button onclick="mostrarTela('criarUsuario')" class="success">Criar Novo Usuário</button>
+    </section>
+
+    <!-- Tela de criar usuário -->
+    <section id="criarUsuario" class="tela">
+      <h2>Criar Novo Usuário</h2>
+      <label>Usuário: <input id="novoUsuario" /></label>
+      <label>Senha: <input id="novaSenha" type="password" /></label>
+      <label>Confirmar Senha: <input id="confirmarSenha" type="password" /></label>
+      <button onclick="criarUsuario()" class="success">Criar Usuário</button>
+      <button onclick="mostrarTela('login')">Voltar para Login</button>
+    </section>
+
+    <!-- Cadastro de Produto -->
+    <section id="cadastroProduto" class="tela">
+      <h2>Cadastro de Produto</h2>
+      <label>Produto: <input id="novoProduto" /></label>
+      <label>Código: <input id="codigoProduto" /></label>
+      <button onclick="cadastrarProduto()">Cadastrar Produto</button>
+      <label>Importar lista (apenas nomes, um por linha): <input type="file" accept=".txt,.csv" onchange="importarProdutos(event)" /></label>
+      <button onclick="excluirProdutosImportados()">Excluir Produtos Importados</button>
+      <div id="tabelaProdutos"></div>
+    </section>
+
+    <!-- Cadastro de Defeito -->
+    <section id="cadastroDefeito" class="tela">
+      <h2>Cadastro de Defeito</h2>
+      <label>Defeito: <input id="novoDefeito" /></label>
+      <button onclick="cadastrarDefeito()">Cadastrar Defeito</button>
+      <label>Importar lista de defeitos (um por linha): <input type="file" id="importDefeitos" accept=".txt,.csv" /></label>
+      <button onclick="importarDefeitos()">Importar Defeitos</button>
+      <button onclick="excluirDefeitosImportados()">Excluir Defeitos Importados</button>
+      <div id="tabelaDefeitos"></div>
+    </section>
+
+    <!-- Registrar Defeito -->
+    <section id="registro" class="tela">
+      <h2>Registrar Defeito</h2>
+      <label>Produto:
+        <select id="selectProduto"><option value="">Selecione o produto</option></select>
+      </label>
+      <label>Defeito:
+        <select id="selectDefeito"><option value="">Selecione o defeito</option></select>
+      </label>
+      <label>Quantidade: <input id="quantidade" type="number" /></label>
+      <button onclick="registrarDefeito()">Registrar Defeito</button>
+    </section>
+
+    <!-- Quarentena -->
+    <section id="quarentena" class="tela">
+      <h2>Registro de Quarentena</h2>
+      <label>Produto:
+        <select id="selectProdutoQuarentena"><option value="">Selecione o produto</option></select>
+      </label>
+      <label>Quantidade em Quarentena: <input id="quantidadeQuarentena" type="number" /></label>
+      <label>Quantidade que Vazou: <input id="quantidadeVazou" type="number" /></label>
+      <label>Quando Vazou: <input id="quandoVazou" type="text" placeholder="Descreva quando e como vazou" /></label>
+      <button onclick="registrarQuarentena()">Registrar Quarentena</button>
+      <div id="tabelaQuarentena" style="margin-top: 20px;"></div>
+    </section>
+
+    <!-- Tela High -->
+    <section id="high" class="tela">
+      <h2>High - Controle de Serviços</h2>
+      
+      <div class="filter-container">
+        <label>Funcionário:
+          <select id="selectFuncionario">
+            <option value="">Selecione o funcionário</option>
+          </select>
+        </label>
+        <button onclick="adicionarFuncionario()">+ Novo Funcionário</button>
+      </div>
+
+      <div class="filter-container">
+        <h3>Serviços Cadastrados</h3>
+        <label>Novo Serviço: <input id="novoServico" /></label>
+        <button onclick="cadastrarServico()">Cadastrar Serviço</button>
+        <div id="listaServicos" style="margin-top: 10px;"></div>
+      </div>
+
+      <div class="filter-container">
+        <h3>Temporizador</h3>
+        <div id="timerDisplay">00:00:00</div>
+        <div id="servicoAtualInfo"></div>
+        <label>Quantidade Produzida: <input id="quantidadeProduzida" type="number" min="0" /></label>
+        <button id="btnIniciarParar" onclick="iniciarPararServico()">Iniciar Serviço</button>
+        <button onclick="finalizarServico()" style="display:none;" id="btnFinalizar">Finalizar Serviço</button>
+      </div>
+
+      <div class="filter-container">
+        <h3>Histórico de Serviços</h3>
+        <div id="historicoServicos"></div>
+      </div>
+
+      <div class="filter-container">
+        <h3>Relatório de Serviços</h3>
+        <div style="margin-bottom: 15px;">
+          <label>Filtrar por Funcionário:
+            <select id="filtroFuncionarioHigh" onchange="gerarRelatorioServicos()">
+              <option value="">Todos</option>
+            </select>
+          </label>
+          <label>Filtrar por Serviço:
+            <select id="filtroServicoHigh" onchange="gerarRelatorioServicos()">
+              <option value="">Todos</option>
+            </select>
+          </label>
+          <label>Data Início:
+            <input id="filtroDataInicioHigh" type="date" onchange="gerarRelatorioServicos()" />
+          </label>
+          <label>Data Fim:
+            <input id="filtroDataFimHigh" type="date" onchange="gerarRelatorioServicos()" />
+          </label>
+        </div>
+        <div style="margin-bottom: 15px;">
+          <button onclick="exportarServicosExcel()" class="success">Exportar para Excel</button>
+          <button onclick="limparFiltrosHigh()">Limpar Filtros</button>
+        </div>
+        <div id="relatorioServicosContainer"></div>
+      </div>
+    </section>
+
+    <!-- Relatório -->
+    <section id="relatorio" class="tela">
+      <h2>Relatório de Defeitos</h2>
+      <div id="relatorioContainer"></div>
+    </section>
+
+    <!-- Gráficos -->
+    <section id="graficos" class="tela">
+      <h2>Gráficos de Defeitos</h2>
+      <div id="graficosContainer"></div>
+    </section>
+
+    <!-- Tela de Gerenciamento -->
+    <section id="gerenciamento" class="tela">
+      <h2>Gerenciamento</h2>
+      <button onclick="mostrarTela('criarUsuario')" class="success">Criar Novo Usuário</button>
+      <button onclick="limparDados()" class="danger">Limpar Todos os Dados</button>
+      <button onclick="mostrarTela('login')">Voltar para Login</button>
+    </section>
+  </main>
+</body>
+</html>
+
+
